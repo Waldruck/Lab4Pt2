@@ -163,21 +163,52 @@ function fetchComments($id) {
 }
 
 function setComment($id) {
-
+    let score =$.trim($('#score').val()); //gets the user's email
+    let comment =$.trim($('#message.text').val()); //gets the user's email
+    
     //TODO complete implementation using the product id
+    //System.out.print("Hello world!");
     alert("app.js/setComment() not implemented")
+
 
     //HINT
     //Take note of how the Ajax call in app.js/fetchComments() posts a GET request to corresponding API endpoint.
     //Look at the Microservice API Documentation and find out the appripriate type of request for this action.
+    $.ajax({
+        url: Url+'SetComment', //API url
+        type: 'post', //type of request (get)
+        dataType: 'json', //dataType, which is json for this lab.
+        contentType: 'text/plain', //contentType, which is text/plain since json is sent as plain text.
+        data: JSON.stringify({"product_id":$id, "comment":comment, "score":score}), //data to be sent
+    
+        success: function (data) { //on success
+            alert("Comment submitted successfully");
+        },
+        error: function (data) { //on error, throw an alert
+            alert("Error while fetching data.");
+        }
 
+    });
 }
 
 function addToCart($id) {
-
+    let email =$.trim($('#email').val());
     //TODO complete implementation using the product id
-    alert("app.js/addToCart() not implemented")
+    $.ajax({
+        url: Url+'AddToCart', //API url
+        type: 'post', //type of request (get)
+        dataType: 'json', //dataType, which is json for this lab.
+        contentType: 'text/plain', //contentType, which is text/plain since json is sent as plain text.
+        data: JSON.stringify({"product_id":$id, "email":email,}), //data to be sent
+    
+        success: function (data) { //on success
+            alert("Added to shopping cart succesfully!");
+        },
+        error: function (data) { //on error, throw an alert
+            alert("Error while fetching data.");
+        }
 
+    });
 
 }
 
